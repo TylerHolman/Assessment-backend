@@ -6,7 +6,10 @@ const app = express();
 
 app.use(cors());
 
-app.use(express.json()); // When we want to be able to accept JSON.
+app.use(express.json()); 
+
+const ctrl = require(`./controller.js`)
+
 
 app.get("/api/compliment", (req, res) => {
   const compliments = ["Gee, you're a smart cookie!",
@@ -14,7 +17,7 @@ app.get("/api/compliment", (req, res) => {
 					 "Your Javascript skills are stellar.",
   ];
 
-  // choose random compliment
+ 
   let randomIndex = Math.floor(Math.random() * compliments.length);
   let randomCompliment = compliments[randomIndex];
 
@@ -35,7 +38,7 @@ app.get("/api/fortune", (req, res) => {
            `Do not seek to possess either goods or fiefs for your old age.`
   ];
 
-  // choose random compliment
+  //choose random compliment
   let randomIndex = Math.floor(Math.random() * fortune.length);
   let randomFortune =fortune[randomIndex];
 
@@ -48,7 +51,7 @@ app.get("/api/games", (req, res) => {
 				`Lost Ark and Elden Ring`,
   ];
 
-  // choose random compliment
+  
   let randomIndex = Math.floor(Math.random() * games.length);
   let randomGames = games[randomIndex];
 
@@ -62,7 +65,7 @@ app.get("/api/certs", (req, res) => {
            "CISSP: Certified Information Systems Security Professional"
   ];
 
-  // choose random compliment
+
   let randomIndex = Math.floor(Math.random() * certs.length);
   let randomCerts = certs[randomIndex];
 
@@ -76,7 +79,7 @@ app.get("/api/gym", (req, res) => {
            `Leg Day!`
   ];
 
-  // choose random compliment
+
   let randomIndex = Math.floor(Math.random() * workout.length);
   let randomWorkout = workout[randomIndex];
 
@@ -84,5 +87,7 @@ app.get("/api/gym", (req, res) => {
   
 });
 
+app.post(`/api/watchlist`, ctrl.addItem)
+app.delete(`/api/watchlist/:id`, ctrl.deleteItem)
 
 app.listen(4000, () => console.log("Server running on 4000"));
